@@ -19,5 +19,7 @@ custom:
     number: 3
 
 functions:
-  hello:
+  api:
     handler: src/api.handler
+    events:
+      - httpApi: '*'
