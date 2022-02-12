@@ -11,6 +11,12 @@ provider:
 plugins:
   - serverless-plugin-common-excludes
   - serverless-plugin-include-dependencies
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 3
 
 functions:
   hello:
