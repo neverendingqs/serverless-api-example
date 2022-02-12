@@ -1,4 +1,4 @@
-service: aws-node-project
+service: serverless-api-example
 
 frameworkVersion: '3'
 useDotenv: true
