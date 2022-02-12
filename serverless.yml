@@ -1,0 +1,17 @@
+service: aws-node-project
+
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  region: ${env:AWS_REGION, 'ca-central-1'}
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
+
+functions:
+  hello:
+    handler: src/api.handler
