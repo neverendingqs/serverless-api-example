@@ -38,6 +38,7 @@ provider:
               - Arn
 
 plugins:
+  - serverless-api-tester
   - serverless-plugin-common-excludes
   - serverless-plugin-include-dependencies
   - serverless-prune-plugin
