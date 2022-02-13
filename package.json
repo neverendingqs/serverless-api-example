@@ -29,6 +29,7 @@
     "serverless-plugin-common-excludes": "^4.0.0",
     "serverless-plugin-include-dependencies": "^5.0.0",
     "serverless-prune-plugin": "^2.0.1",
+    "serverless-stack-policy-by-resource-type": "^0.1.0",
     "supertest": "^6.2.2"
   },
   "dependencies": {
