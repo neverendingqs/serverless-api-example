@@ -8,7 +8,7 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 app.use(express.json());
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 
 app.get('/healthcheck', async function (req, res) {
   // Nothing special - just making sure everything is wired up properly.
