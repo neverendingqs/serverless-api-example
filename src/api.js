@@ -22,4 +22,6 @@ app.use((req, res, next) => {
 });
 
 module.exports.app = app;
+// NB: Lambda functions are short-lived, so things like caching might not work so well here
+// Consider another tech if caching is important (Fargate? ECS? EC2?)
 module.exports.handler = serverless(app);

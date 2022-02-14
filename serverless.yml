@@ -54,6 +54,8 @@ functions:
   api:
     handler: src/api.handler
     events:
+      # TODO: domain names + SSL certs for production environments
+      # Is there an existing load balancer we should integrate with?
       - httpApi: '*'
     environment:
       USERS_TABLE:
