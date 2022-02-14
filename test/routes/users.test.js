@@ -46,7 +46,7 @@ describe('/api', function() {
             Key: {
               [ddbAttributeNames.userId]: { S: id },
             },
-            ConsistentRead: false,
+            ConsistentRead: true,
           })
           .returns({
             promise: sinon
@@ -79,7 +79,7 @@ describe('/api', function() {
             Key: {
               [ddbAttributeNames.userId]: { S: id },
             },
-            ConsistentRead: false,
+            ConsistentRead: true,
           })
           .returns({
             promise: sinon
@@ -107,7 +107,7 @@ describe('/api', function() {
             Key: {
               [ddbAttributeNames.userId]: { S: id },
             },
-            ConsistentRead: false,
+            ConsistentRead: true,
           })
           .returns({
             promise: sinon
