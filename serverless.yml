@@ -76,3 +76,9 @@ resources:
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: true
+
+    # TODO: CloudWatch alarms for API Lambda function:
+    # - # of errors depending on error tolerance rate
+    # - Concurrency limits
+    # - Duration thresholds
+    #   - Cold start time might be interesting later on

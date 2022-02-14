@@ -114,4 +114,5 @@ module.exports = function({
  * Endpoint ideas:
  * - PATCH - update a user
  * - bulk update route, which could return a 202 and queue the work into SQS to eventually process the bulk request
+ *   - NB: double-check API Gateway payload size limits when implementing this route
  */
