@@ -23,8 +23,7 @@ module.exports = function({
       const { Item } = await ddb.getItem({
         TableName: usersTable,
         Key: { [ddbAttributeNames.userId]: { S: id } },
-        // Can set to `true` if strong consistency is required
-        ConsistentRead: false,
+        ConsistentRead: true,
       }).promise();
 
       if (Item) {
