@@ -16,6 +16,8 @@ module.exports = function({
 
   const router = express.Router();
 
+  // TODO: authorization. Use Express middleware, or an authorizer Lambda?
+
   router.get('/:id', async function(req, res) {
     const id = req.params.id;
 
