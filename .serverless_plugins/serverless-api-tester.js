@@ -87,6 +87,9 @@ class ServerlessApiTester {
     expect(response.status).to.equal(200);
   }
 
+  // Simple end-to-end test
+  // Idea: run on a staging environment, and potentially on production immediately after a deploy if safe
+  // Alternative: move this to 'test/e2e/' and use mocha.
   async test() {
     const host = this.options.host || await this._getApiHost();
     await this._runHealthcheck({ host });
