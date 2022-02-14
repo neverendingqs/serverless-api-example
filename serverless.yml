@@ -77,6 +77,24 @@ resources:
           AttributeName: ttl
           Enabled: true
 
+    # Alternative data stores:
+
+    # - S3 (+ CloudFront?)
+    #   - Pro: Storage is ~4.35x less expensive than S3
+    #   - Con: S3 read / write latency is not as low as DDB
+    #   - Con: S3 read / write cost is higher (~4x for writes, ~1.74x for reads)
+    #   - Maybe if user reads / writes are low?
+    #     - Could use DDB Standard-IA instead of Standard?
+
+    # - Aurora (Serverless?)
+    #   - Pro: Storage cost is lower
+    #     - This could mean SARGability is higher due to lower index costs
+    #   - Pro: Can store and JOIN across multiple domains beyond users
+    #   - Con: Upfront schema definitions
+    #   - Con: Ongoing schema management (e.g. adding a column)
+    #   - Con: May need to add, configure, and manage VPCs and DB credentials (vs. pure IAM)
+
+
     # TODO: CloudWatch alarms for API Lambda function:
     # - # of errors depending on error tolerance rate
     # - Concurrency limits
