@@ -22,12 +22,11 @@ module.exports = function({
     try {
       const { Item } = await ddb.getItem({
         TableName: usersTable,
-        Key: {
-          [ddbAttributeNames.userId]: { S: id },
-        },
+        Key: { [ddbAttributeNames.userId]: { S: id } },
         // Can set to `true` if strong consistency is required
         ConsistentRead: false,
       }).promise();
+
       if (Item) {
         // TODO: decide if all fields are required
         res.json({
@@ -39,19 +38,14 @@ module.exports = function({
       } else {
         res
           .status(404)
-          .json({
-            error: 'User not found.',
-            userId: id,
-          });
+          .json({ error: 'User not found.', userId: id });
       }
     } catch (err) {
       console.log(err);
+
       res
         .status(500)
-        .json({
-          error: 'Error occurred while retrieving user',
-          userId: id,
-        });
+        .json({ error: 'Error occurred while retrieving user', userId: id });
     }
   });
 
@@ -81,6 +75,7 @@ module.exports = function({
       res.send(200);
     } catch (err) {
       console.log(err);
+
       res
         .status(500)
         .json({
@@ -96,9 +91,7 @@ module.exports = function({
     try {
       await ddb.deleteItem({
         TableName: usersTable,
-        Key: {
-          [ddbAttributeNames.userId]: { S: id },
-        },
+        Key: { [ddbAttributeNames.userId]: { S: id } },
       }).promise();
 
       res.send(200);

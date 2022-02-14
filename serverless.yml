@@ -19,9 +19,10 @@ provider:
         - Update:Replace
         - Update:Delete
       ResourceType:
+        # Prevents unintentional DDB data loss
         - AWS::DynamoDB::Table
 
-  # TODO: each Lambda function should have its own IAM policy
+  # TODO: each Lambda function should have its own IAM policy to adhere to principle of least privilege
   iam:
     role:
       statements:

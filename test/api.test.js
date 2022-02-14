@@ -16,3 +16,9 @@ describe('/healthcheck', function() {
     expect(response.body).to.deep.equal({ status: 'green' });
   });
 });
+
+describe('/{ANY}', function() {
+  it('returns 404 if route not defined', function() {
+    // TODO
+  });
+});
