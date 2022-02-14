@@ -27,7 +27,7 @@ module.exports = function({
       }).promise();
 
       if (Item) {
-        // TODO: decide if all fields are required
+        // TODO: decide which fields are required
         res.json({
           age: parseInt(Item[ddbAttributeNames.age]?.N),
           id: Item[ddbAttributeNames.userId]?.S,
@@ -61,7 +61,9 @@ module.exports = function({
         TableName: usersTable,
         Item: {
           // TODO: do input validation instead of relying on DDB to do it for us
-          // TODO: decide if all fields are required
+          // TODO: decide which fields are required
+          // Option: https://github.com/express-validator/express-validator
+          // Option: https://github.com/andrewkeig/express-validation
           [ddbAttributeNames.age]: { N: `${age}` },
           [ddbAttributeNames.name]: { S: name },
           [ddbAttributeNames.tags]: { SS: tags },
