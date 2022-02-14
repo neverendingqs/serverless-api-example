@@ -59,24 +59,71 @@ class ServerlessApiTester {
     expect(body).to.deep.equal({ status: 'green' });
   }
 
-  async test() {
-    const host = this.options.host || await this._getApiHost();
-
-    await this._runHealthcheck({ host });
-
-    const id = uuidv4();
+  async _getUser({ host, id, userExists = false }) {
     const response = await fetch(`${host}/api/users/${id}`);
 
     expect(response.headers.get('content-type')).to.match(/application\/json/);
-    expect(response.status).to.equal(200);
+    if(userExists) {
+      expect(response.status).to.equal(200);
+    } else {
+      expect(response.status).to.equal(404);
+    }
 
-    const body = await response.json();
-    expect(body).to.deep.equal({
-      id,
-      name: `name-of-${id}`,
-      age: 20,
-      tags: ['programmer'],
+    return response.json()
+  }
+
+  async _putUser({ host, id, body }) {
+    const response = await fetch(`${host}/api/users/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
     });
+
+    expect(response.status).to.equal(200);
+  }
+
+  async _deleteUser({ host, id }) {
+    const response = await fetch(`${host}/api/users/${id}`, { method: 'DELETE' });
+    expect(response.status).to.equal(200);
+  }
+
+  async test() {
+    const host = this.options.host || await this._getApiHost();
+    await this._runHealthcheck({ host });
+    this.log.notice('Healthcheck successful.');
+
+    const id = uuidv4();
+
+    const firstGetBody = await this._getUser({ host, id, userExists: false });
+    expect(firstGetBody).to.deep.equal({
+      error: 'User not found.',
+      userId: id,
+    });
+    this.log.notice(`Confirmed user '${id}' does not exist.`);
+
+    const newUserBody = {
+      age: 10,
+      name: 'Ash Ketchum',
+      tags: ['champion', 'trainer'],
+    }
+
+    await this._putUser({ host, id, body: newUserBody });
+    this.log.notice(`Created user '${id}'.`);
+
+    const secondGetBody = await this._getUser({ host, id, userExists: true });
+    secondGetBody.tags = secondGetBody?.tags?.sort((a, b) => a.localeCompare(b));
+    expect(secondGetBody).to.deep.equal({ ...newUserBody, id });
+    this.log.notice(`Confirmed user '${id}' now exists.`);
+
+    await this._deleteUser({ host, id });
+    this.log.notice(`Deleted user '${id}'.`);
+
+    const thirdGetBody = await this._getUser({ host, id, userExists: false });
+    expect(thirdGetBody).to.deep.equal({
+      error: 'User not found.',
+      userId: id,
+    });
+    this.log.notice(`Confirmed user '${id}' no longer exists.`);
 
     this.log.notice('All tests passed!');
   }

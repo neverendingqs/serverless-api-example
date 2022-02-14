@@ -30,9 +30,12 @@
     "serverless-plugin-include-dependencies": "^5.0.0",
     "serverless-prune-plugin": "^2.0.1",
     "serverless-stack-policy-by-resource-type": "^0.1.0",
+    "sinon": "^13.0.1",
+    "sinon-chai": "^3.7.0",
     "supertest": "^6.2.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.1073.0",
     "express": "^4.17.2",
     "serverless-http": "^2.7.0",
     "uuid": "^8.3.2"
