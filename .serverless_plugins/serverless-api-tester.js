@@ -36,7 +36,7 @@ class ServerlessApiTester {
   async _getApiHost() {
     const service = this.serverless.service.service;
     const stage = this.serverless.service.provider.stage;
-    const stackName = `${service}-${stage}`;
+    const stackName = this.provider.naming.getStackName();
 
     const response = await this.provider.request('CloudFormation', 'describeStacks', { StackName: stackName });
     const apiHost = response?.Stacks?.[0]?.Outputs
